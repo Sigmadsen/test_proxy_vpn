@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User info</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/styles.css' %}">
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="{% url 'user_info' %}">User info</a></li>
+            <li><a href="{% url 'stats' %}">VPN stats</a></li>
+            <li><a href="{% url 'add_site' %}">Add VPN site</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>User info</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+</body>
+</html>

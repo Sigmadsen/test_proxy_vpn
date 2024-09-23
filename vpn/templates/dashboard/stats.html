@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stats</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/styles.css' %}">
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="{% url 'user_info' %}">User info</a></li>
+            <li><a href="{% url 'stats' %}">VPN stats</a></li>
+            <li><a href="{% url 'add_site' %}">Add VPN site</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>VPN sites Stats</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Title</th>
+                    <th>Visit count</th>
+                    <th>Data sent (MB)</th>
+                    <th>Data received (MB)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for site in sites %}
+                    <tr>
+                        <td>{{ site.url }}</td>
+                        <td>{{ site.title }}</td>
+                        <td>{{ site.visit_count }}</td>
+                        <td>{{ site.data_sent_mb }}</td>
+                        <td>{{ site.data_received_mb }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="2">You don't have any websites yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
